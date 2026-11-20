@@ -70,3 +70,8 @@ export function streak(drinks: Drink[], goalMl: number, now = Date.now()) {
   }
   return count
 }
+
+// Remembers the last day we showed the goal celebration, so it only plays once per day.
+const KEY_CELEBRATED = 'ht.celebrated.v1'
+export const loadCelebratedDay = () => read<string>(KEY_CELEBRATED, '')
+export const saveCelebratedDay = (day: string) => write(KEY_CELEBRATED, day)

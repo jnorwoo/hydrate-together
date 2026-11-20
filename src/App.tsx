@@ -4,13 +4,16 @@ import {
   type Drink,
   type Settings,
   dayKey,
+  loadCelebratedDay,
   loadDrinks,
   loadSettings,
+  saveCelebratedDay,
   saveDrinks,
   saveSettings,
   streak,
   totalsByDay,
 } from './storage'
+import Celebration from './components/Celebration'
 import { askPermission, notificationsSupported, showReminder, startReminderLoop } from './reminders'
 
 const QUICK_ADD = [
@@ -24,6 +27,7 @@ export default function App() {
   const [settings, setSettings] = useState<Settings>(loadSettings)
   const [showSettings, setShowSettings] = useState(false)
   const [custom, setCustom] = useState('')
+  const [celebrating, setCelebrating] = useState(false)
 
   useEffect(() => saveDrinks(drinks), [drinks])
   useEffect(() => saveSettings(settings), [settings])
@@ -46,6 +50,11 @@ export default function App() {
   function add(ml: number) {
     if (!ml || ml <= 0) return
     setDrinks((prev) => [...prev, { id: crypto.randomUUID(), ml, at: Date.now() }])
+    // Celebrate once per day, only when this drink takes the total across the goal.
+    if (total < settings.goalMl && total + ml >= settings.goalMl && loadCelebratedDay() !== today) {
+      saveCelebratedDay(today)
+      setCelebrating(true)
+    }
   }
   function remove(id: string) {
     setDrinks((prev) => prev.filter((d) => d.id !== id))
@@ -70,6 +79,7 @@ export default function App() {
 
   return (
     <main className="app">
+      {celebrating && <Celebration onDone={() => setCelebrating(false)} />}
       <header className="top">
         <div>
           <p className="hello">{settings.name ? `Hi ${settings.name}!` : 'Hi there!'}</p>

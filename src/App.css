@@ -60,3 +60,19 @@ input, select { padding: 10px 12px; border-radius: 12px; border: 1px solid var(-
 .log { list-style: none; margin: 0; padding: 0; }
 .log li { display: grid; grid-template-columns: 1fr 1fr auto; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--track); }
 .log li:last-child { border-bottom: none; }
+
+.celebrate { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; pointer-events: none; }
+.celebrate-msg {
+  pointer-events: auto; margin: 0 24px; padding: 16px 22px; border-radius: 20px; text-align: center;
+  background: var(--card); color: var(--deep); font-weight: 700; font-size: 1.2rem; box-shadow: var(--shadow);
+  animation: pop 0.4s ease-out;
+}
+.confetti { position: absolute; inset: 0; overflow: hidden; }
+.piece { position: absolute; top: -20px; width: 10px; height: 14px; border-radius: 2px; animation: fall linear forwards; }
+.piece.drop { width: 10px; height: 10px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); }
+@keyframes fall { to { transform: translateY(110vh) rotate(540deg); opacity: 0.9; } }
+@keyframes pop { from { transform: scale(0.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .confetti { display: none; }
+  .celebrate-msg { animation: none; }
+}
