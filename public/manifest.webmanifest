@@ -1,0 +1,11 @@
+{
+  "name": "Hydrate Together",
+  "short_name": "Hydrate",
+  "description": "Track your water, get gentle reminders, cheer on friends.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#eef7fb",
+  "theme_color": "#2a9fd6",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

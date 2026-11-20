@@ -1,0 +1,38 @@
+name: 💡 Feature idea
+description: Something you'd like the app to do. Plain English is perfect!
+labels: ["idea"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the idea! No technical details needed. Just describe it like you'd tell a friend.
+        An AI agent will read this, ask questions if needed, and build it.
+  - type: textarea
+    id: what
+    attributes:
+      label: What should the app do?
+      placeholder: "e.g. Send me a cute reminder every hour between 9am and 9pm"
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why would this be nice? (optional)
+      placeholder: "e.g. I always forget to drink in the afternoon"
+  - type: textarea
+    id: look
+    attributes:
+      label: How should it look or feel? (optional)
+      description: You can paste screenshots or pictures here too.
+      placeholder: "e.g. Playful, with a little animated water drop"
+  - type: dropdown
+    id: who
+    attributes:
+      label: Which agent should build it?
+      options:
+        - Any agent
+        - Claude
+        - Quokka
+        - Muse
+    validations:
+      required: false
